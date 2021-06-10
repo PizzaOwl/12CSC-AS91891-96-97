@@ -2,11 +2,6 @@ from tkinter import *
 names=[]
 class LogInStarter:
 
-    def namecollection(self):
-        name=self.InputBox.get()
-        names.append(name)
-        self.LogInFrame.destroy
-
     def __init__(self, parent):
         BackgroundColour="#1a2b2c"
 
@@ -26,7 +21,7 @@ class LogInStarter:
         self.InputBox2=Entry(self.LogInFrame, bg="#1f2627",fg="#fcfaf9",insertbackground="#fcfaf9",insertwidth=5,font="courier",text="Password")#creating an input box
         self.InputBox2.pack(anchor='center', side='top',padx=20,pady=5)
 
-        self.Button1=Button(self.LogInFrame,text="Boop",bg="Cyan",command=self.namecollection)#now were making a button
+        self.Button1=Button(self.LogInFrame,text="Boop",bg="Cyan")#now were making a button
         self.Button1.pack(anchor='center', side='top',padx=20,pady=10)
 
 
