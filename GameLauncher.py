@@ -30,23 +30,16 @@ background_colour = "#1a2b2c"
 text_box_colour = "#1f2627"
 button_colour = "#8bc4d9"
 
+#the first window of the quiz and where the user will create an account and be able to log in
 class LogInStarter:
 
-     def sign_up_launch(self):
-        self.side_bar.destroy()
-        self.log_window_frame.destroy()
-        Signup(root)
-
+    #the window of the Log-In page
      def __init__(self, parent):
         BackgroundColour = "#1a2b2c"
 
         self.log_username_var = StringVar()
         self.log_password_var = StringVar()
 
-        self.side_bar = Frame(parent, bg = BackgroundColour, width = 125, height = 150, relief = 'sunken',borderwidth = 2, )
-        self.side_bar.pack(expand = False, fill = 'both', side = 'left', anchor = 'nw')
-
-        #creating the frame
         self.log_window_frame = Frame(parent, bg = BackgroundColour,padx = 175,pady = 150)
         self.log_window_frame.pack(expand = False, fill = 'both', side = 'right', anchor = 'ne')
 
@@ -69,6 +62,12 @@ class LogInStarter:
         self.heading_label = Label(self.log_window_frame, text = "",bg = '#1a2b2c', fg  =  "#7fb643")
         self.heading_label.pack(anchor = 'center', side = 'top',padx = 20) 
 
+     #this function will be called if the user presses the sign-up button, this will launch the sign up window
+     def sign_up_launch(self):
+        self.log_window_frame.destroy()
+        Signup(root)
+      
+    #when the log-in button is pressed this will be launched
      def main_menu_launch(self): 
         user_log = open(os.path.join(sys.path[0],r"UserLog.txt"))
         user_login_info = self.log_username_var.get() + '  ' + self.log_password_var.get()
@@ -167,7 +166,9 @@ class Signup:
         self.sign_window_frame.destroy()
         LogInStarter(root)
 
+#the main menu is where the user can launch the quiz
 class MainMenu:
+  #the window
     def __init__(self, parent):
         BackgroundColour = "#1a2b2c"
 
@@ -183,17 +184,12 @@ class MainMenu:
         self.main_button_1 = Button(self.main_window_frame,text = "Start Quiz", bg = "#8bc4d9", command = self.quiz_launch)
         self.main_button_1.pack(anchor = 'n', side = 'top', padx=100, pady=20)
 
-
+    #this function launches the quiz
     def quiz_launch(self):
         self.main_window_frame.destroy()
         Quiz(root)
 
-    def quiz_launch(self):
-        self.main_log_sidebar.destroy()
-        self.main_window_frame.destroy()
-        Quiz(root)
-
-#class to controQul window for questions.
+#class to control window for questions.
 class Quiz:
 
     #function to make answer buttons and question text box update with each new question.
@@ -329,6 +325,7 @@ class ExitProgram:
     self.cancel_button = Button(self.close_frame, text = "Cancel", background = button_colour, command = self.Cancel, width = 10, height = 1)
     self.cancel_button.place(x = 30, y = 60)
 
+#function to control answer buttons and qustion 
 def questions_setup(self):
   randomiser()
   self.choice_variable.set(0)
@@ -337,6 +334,7 @@ def questions_setup(self):
   self.answer_2.config(text = questions_answers[qnum][2])
   self.answer_3.config(text = questions_answers[qnum][3])
 
+#function to randomise question order
 def randomiser():
   global qnum
   qnum = random.randint(1, 10)
