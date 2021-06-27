@@ -174,20 +174,19 @@ class MainMenu:
         self.main_window_frame = Frame(parent, bg = BackgroundColour, width = 200, height = 300, relief = 'sunken',borderwidth = 2, )
         self.main_window_frame.pack(expand = False, fill = 'both', side = 'left', anchor = 'w')
 
-        self.main_button_2 = Button(self.main_window_frame,text = "Continue", bg = "#8bc4d9")
-        self.main_button_2.grid(row=1, column=1, padx=100, pady=20)
-
-        self.main_button_1 = Button(self.main_window_frame,text = "Start Quiz", bg = "#8bc4d9", command = self.quiz_launch)
-        self.main_button_1.grid(row=0, column=1, padx=100, pady=20)
-
-        self.main_log_sidebar = Frame(parent, bg = BackgroundColour,padx = 100,pady = 125)
-        self.main_log_sidebar.pack(expand = False, fill = 'both', side = 'top', anchor = 'ne')
-
-        self.log_username_box = Entry(self.main_log_sidebar, bg = "#1f2627",fg = "#7fb643",insertbackground = "#82f207",insertwidth = 5,font = "courier",text = "Username")
+        self.log_username_box = Entry(self.main_window_frame, bg = "#1f2627",fg = "#7fb643",insertbackground = "#82f207",insertwidth = 5,font = "courier",text = "Username")
         self.log_username_box.pack(anchor = 'n', side = 'top',padx = 10,pady = 5) 
 
-        self.log_password_box = Entry(self.main_log_sidebar, bg = "#1f2627",fg = "#7fb643",insertbackground = "#82f207",insertwidth = 5,font = "courier",text = "Password")
+        self.log_password_box = Entry(self.main_window_frame, bg = "#1f2627",fg = "#7fb643",insertbackground = "#82f207",insertwidth = 5,font = "courier",text = "Password")
         self.log_password_box.pack(anchor = 'n', side = 'top',padx = 10,pady = 5)
+
+        self.main_button_1 = Button(self.main_window_frame,text = "Start Quiz", bg = "#8bc4d9", command = self.quiz_launch)
+        self.main_button_1.pack(anchor = 'n', side = 'top', padx=100, pady=20)
+
+
+    def quiz_launch(self):
+        self.main_window_frame.destroy()
+        Quiz(root)
 
     def quiz_launch(self):
         self.main_log_sidebar.destroy()
