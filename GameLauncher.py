@@ -22,7 +22,7 @@ questions_answers = {
     ],
     9: ["What was the first nation to deploy tanks?", "Britain", "Germany", "France", "Britain", 1
     ],
-    10: ["Whp was the best sniper of WW1?", "Chris Kyle", "Simo Hayha", "Francis Pegahmagabow", "Francis Pegahmagabow", 3
+    10: ["Who was the best sniper of WW1?", "Chris Kyle", "Simo Hayha", "Francis Pegahmagabow", "Francis Pegahmagabow", 3
     ]
 }
 asked = []
@@ -250,7 +250,7 @@ class Quiz:
       self.quiz_frame = Frame(parent, background = background_colour, padx = 150, pady = 170)
       self.quiz_frame.grid()
 
-      self.question_label = Label(self.quiz_frame, text = questions_answers[qnum][0], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised", height = 3, width = 50)
+      self.question_label = Label(self.quiz_frame, text = questions_answers[qnum][0], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised", height = 3, width = 65)
       self.question_label.grid(row = 0, padx = 10, pady = 10)
 
       self.choice_variable = IntVar()
