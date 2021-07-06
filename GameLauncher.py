@@ -1,6 +1,7 @@
 from tkinter import *
 import os
 import random
+import sys
 
 questions_answers = {
     1: ["What Started World War 1?", "German invasion of Poland", "French attack through Belgium", "Assasination of Franz Ferdinand", "Assasination of Franz Ferdinand", 3
@@ -71,17 +72,19 @@ class LogInStarter:
      def main_menu_launch(self): 
         user_log = open(os.path.join(sys.path[0],r"UserLog.txt"))
         user_login_info = self.log_username_var.get() + '  ' + self.log_password_var.get()
+      
         if user_login_info in user_log.read():
-            print(user_login_info)
             user_log.close
-            self.side_bar.destroy()
             self.log_window_frame.destroy()
             MainMenu(root)
         else:
             self.heading_label.configure(text = "Invalid input, please try again or sign up")
             user_log.close
 
+#class that makes the sign up for the user to create their account
 class Signup:
+  
+    #username window and the basis of the window for the sign up process
     def __init__(self, parent):
         BackgroundColour = "#1a2b2c"
         
@@ -101,7 +104,8 @@ class Signup:
 
         self.username_confirm_button = Button(self.sign_window_frame,text = "Continue",bg = "#8bc4d9",command = self.password_sign_up)
         self.username_confirm_button.grid(row=3, column=1, padx=20, pady=20)
-              
+
+    #password window is generated while the username window is terminated     
     def password_sign_up(self):
         self.username_label.destroy()
         self.username_box.destroy()
@@ -124,21 +128,23 @@ class Signup:
         self.password_box.grid(row=1, column=1, padx=20, pady=20)
         self.password_box.focus()
 
-        self.confirm_password_label = Label(self.sign_window_frame, text = "Confirm Password:",bg = "#1a2b2c", fg  =  "#7fb643", font = "courier")
+        self.confirm_password_label = Label(self.sign_window_frame, text = "Confirm Password:", bg = "#1a2b2c", fg  =  "#7fb643", font = "courier")
         self.confirm_password_label.grid(row=2, column=0, padx=20, pady=20)
 
-        self.confirm_password_box = Entry(self.sign_window_frame, textvariable = self.confirm_password_var, bg = "#1f2627",fg = "#fcfaf9",insertbackground = "#82f207",insertwidth = 5,font = "courier")#creating an input box
+        self.confirm_password_box = Entry(self.sign_window_frame, textvariable = self.confirm_password_var, bg = "#1f2627", fg = "#fcfaf9", insertbackground = "#82f207" ,insertwidth = 5, font = "courier")#creating an input box
         self.confirm_password_box.grid(row=2, column=1, padx=20, pady=20)
         self.confirm_password_box.focus()
 
         self.create_account_button = Button(self.sign_window_frame,text = "Create Account",bg = "#8bc4d9",command = self.create_account)
         self.create_account_button.grid(row=3, column=1, padx=20, pady=20)
 
+    #setup for the validation system and the Label that will enform the user if their confirm password is the same as the password input
     def confirm_message(self, message, type = None):
         self.message_label['text'] = message
         if type:
             self.message_label['style'] = type
 
+    #this checks if the password is valid and changes the message accordingly to notify if the password is the same as the confirm password
     def validate(self, *args):
         validate_password = self.password_var.get()
         validate_confirm_password = self.confirm_password_var.get()
@@ -153,6 +159,7 @@ class Signup:
         else:
             self.confirm_message("Error: Password does not match")
 
+    #function creates the account and saves their data into the text file
     def create_account(self):
         self.username_var.get()
         self.password_var.get()
@@ -243,7 +250,7 @@ class Quiz:
       self.quiz_frame = Frame(parent, background = background_colour, padx = 150, pady = 170)
       self.quiz_frame.grid()
 
-      self.question_label = Label(self.quiz_frame, text = questions_answers[qnum][0], background = text_box_colour, borderwidth = 2, relief = "raised", height = 3, width = 40)
+      self.question_label = Label(self.quiz_frame, text = questions_answers[qnum][0], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised", height = 3, width = 50)
       self.question_label.grid(row = 0, padx = 10, pady = 10)
 
       self.choice_variable = IntVar()
@@ -251,26 +258,26 @@ class Quiz:
       self.radio_button_1 = Radiobutton(self.quiz_frame, background = text_box_colour, value = 1, padx = 10, pady = 10, variable = self.choice_variable)
       self.radio_button_1.grid(row = 2, sticky = W, pady = 3)
 
-      self.answer_1 = Label(text = questions_answers[qnum][1], background = text_box_colour, borderwidth = 2, relief = "raised")
+      self.answer_1 = Label(text = questions_answers[qnum][1], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised")
       self.answer_1.place(width = 200, height = 40, x = 250, y = 242)
 
       self.radio_button_2= Radiobutton(self.quiz_frame, background = text_box_colour, value = 2, padx = 10, pady = 10, variable = self.choice_variable)
       self.radio_button_2.grid(row = 3, sticky = W, pady = 3)
 
-      self.answer_2 = Label(text = questions_answers[qnum][2], background = text_box_colour, borderwidth = 2, relief = "raised")
+      self.answer_2 = Label(text = questions_answers[qnum][2], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised")
       self.answer_2.place(width = 200, height = 40, x = 250, y = 292)
 
       self.radio_button_3 = Radiobutton(self.quiz_frame, background = text_box_colour, value = 3, padx = 10, pady = 10, variable = self.choice_variable)
       self.radio_button_3.grid(row = 4, sticky = W, pady = 3)
 
-      self.answer_3 = Label(text = questions_answers[qnum][3], background = text_box_colour, borderwidth = 2, relief = "raised")
+      self.answer_3 = Label(text = questions_answers[qnum][3], background = text_box_colour, borderwidth = 2, fg = '#74bccc', relief = "raised")
       self.answer_3.place(width = 200, height = 40, x = 250, y = 342)
  
-      self.quiz_continue = Button(self.quiz_frame, text = "Confirm", background = button_colour , command  = self.test_progress)
+      self.quiz_continue = Button(self.quiz_frame, text = "Confirm", background = button_colour, command  = self.test_progress)
       self.quiz_continue.place(width = 200, height = 40, x = 250, y = 342)
 
-      self.score_label = Label(self.quiz_frame, text = "Score", background = background_colour)
-      self.score_label.place(width = 200, height = 40, x = 250, y = 392)
+      self.score_label = Label(self.quiz_frame, text = "Score", fg = '#74bccc', background = background_colour)
+      self.score_label.place(width = 400, height = 40, x = 150, y = 292)
 
 
 
@@ -345,6 +352,6 @@ def randomiser():
 
 if __name__ == "__main__":
   root = Tk() #creating a window
-  root.title("Log-In")
+  root.title("The Great War Quiz")
   LogInInstance = LogInStarter(root)
   root.mainloop() #test
